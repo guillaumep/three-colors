@@ -26,7 +26,8 @@ if color not in ('red', 'green', 'blue'):
   print "Only 'red', 'green', or 'blue' are allowed."
   sys.exit(1)
 
-# Write the color to the log
+# Write the color to a log file
+# (simulate an API log)
 log = open("click.log", "a")
 fcntl.lockf(log, fcntl.LOCK_EX)
 log.write("%d %s\n" % (int(time.time()), color))
