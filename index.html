@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="raphael-min.js"></script>
+
+<script>
+$(document).ready(function() {
+    var paper = Raphael(0, 0, window.innerWidth, window.innerHeight)
+
+    initial_radius = window.innerWidth / 8;
+    
+    var circle_top = paper.circle(window.innerWidth / 2, window.innerHeight / 4, initial_radius);
+    circle_top.attr("fill", "#0f0");
+    circle_top.attr("fill-opacity", "64");
+
+    var circle_left = paper.circle(window.innerWidth / 3, window.innerHeight * 0.75, initial_radius);
+    circle_left.attr("fill", "#f00");
+    circle_left.attr("fill-opacity", "64");
+
+    var circle_right = paper.circle(window.innerWidth * 0.66, window.innerHeight * 0.75, initial_radius);
+    circle_right.attr("fill", "#00f");
+    circle_right.attr("fill-opacity", "64");
+    
+    circle_top.click(function() {
+        circle_top.animate({"r":circle_top.attr("r") * 1.10}, 300)
+        circle_right.animate({"r":circle_right.attr("r") * 0.90}, 300)
+        circle_left.animate({"r":circle_left.attr("r") * 0.90}, 300)        
+    })
+    circle_right.click(function() {
+        circle_top.animate({"r":circle_top.attr("r") * 0.90}, 300)
+        circle_right.animate({"r":circle_right.attr("r") * 1.10}, 300)
+        circle_left.animate({"r":circle_left.attr("r") * 0.90}, 300)        
+    })
+    circle_left.click(function() {
+        circle_top.animate({"r":circle_top.attr("r") * 0.90}, 300)
+        circle_right.animate({"r":circle_right.attr("r") * 0.90}, 300)
+        circle_left.animate({"r":circle_left.attr("r") * 1.10}, 300)        
+    })
+    
+})
+</script>
+
+<style type="text/css">
+body {
+  background-color: black;
+} 
+</style>
+
+</head>
+
+<body>
+</body>
+
+</html>
