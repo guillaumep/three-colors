@@ -4,6 +4,7 @@
 # The log data will be agregated in a separate program and be sent to graphite
 
 import os
+import sys
 import time
 import fcntl
 import socket
@@ -20,11 +21,18 @@ print
 query = urlparse.parse_qs(os.environ['QUERY_STRING'])
 color = query['color'][0]
 
+# Only allow red, green or blue
+if color not in ('red', 'green', 'blue'):
+  print "Only 'red', 'green', or 'blue' are allowed."
+  sys.exit(1)
+
 # Write the color to the log
 log = open("click.log", "a")
 fcntl.lockf(log, fcntl.LOCK_EX)
 log.write("%d %s\n" % (int(time.time()), color))
 log.close()
 
-
-print "%s it is!" % color
+print """<html>
+<body style="background-color: %s;">
+</body>
+</html>""" % color
