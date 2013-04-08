@@ -7,7 +7,7 @@
 <script src="jquery-1.9.1.min.js"></script>
 
 <script>
-<!-- reload the pie chart every 5 seconds -->
+<!-- reload the chart every n seconds -->
 function reload_images() {
   d = new Date();
   $("img").each(function() {
@@ -17,7 +17,12 @@ function reload_images() {
   })
 }
 
-setInterval("reload_images()", 5000);
+qs = window.location.search.substring(1)
+reload_interval = 30000
+if (qs.length) {
+  reload_interval = parseInt(qs.split('&')[0].split('=')[1]) * 1000
+}
+setInterval("reload_images()", reload_interval);
 </script>
 
 <style type="text/css">
