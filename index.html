@@ -11,17 +11,17 @@
 $(document).ready(function() {
     var paper = Raphael(0, 0, window.innerWidth, window.innerHeight)
 
-    initial_radius = window.innerWidth / 8;
+    initial_radius = Math.max(window.innerWidth, window.innerHeight) / 8;
 
-    var circle_top = paper.circle(window.innerWidth / 2, window.innerHeight / 4, initial_radius);
+    var circle_top = paper.circle(window.innerWidth / 2, (window.innerHeight / 2) - initial_radius * 1.3, initial_radius);
     circle_top.attr("fill", "#0f0");
     circle_top.attr("fill-opacity", 64);
 
-    var circle_left = paper.circle(window.innerWidth / 3, window.innerHeight * 0.75, initial_radius);
+    var circle_left = paper.circle((window.innerWidth / 2) - initial_radius * 1.3, (window.innerHeight / 2) + initial_radius, initial_radius);
     circle_left.attr("fill", "#f00");
     circle_left.attr("fill-opacity", 64);
 
-    var circle_right = paper.circle(window.innerWidth * 0.66, window.innerHeight * 0.75, initial_radius);
+    var circle_right = paper.circle((window.innerWidth / 2) + initial_radius * 1.3, (window.innerHeight / 2) + initial_radius, initial_radius);
     circle_right.attr("fill", "#00f");
     circle_right.attr("fill-opacity", "64");
     
