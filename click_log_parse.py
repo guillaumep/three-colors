@@ -5,8 +5,11 @@ import datetime
 
 LOG_FILE = "click.log"
 LAST_SEND_DATETIME = datetime.datetime(1980,1,1)
-# resoluton in seconds
+# Graphite database resolution in seconds
+# (smallest interval configured for data timestamps)
 GRAPHITE_RESOLUTION = 5
+# Go back only 60 seconds in the logs
+MINIMUM_TIMESTAMP = int(time.time()) - (int(time.time()) % GRAPHITE_RESOLUTION) - 60
 
 def main():
     data = []
@@ -22,14 +25,15 @@ def main():
             logfile = open(LOG_FILE, 'r')
             logfile.seek(last_read_position)
             for line in logfile:
-               parsed_data = parse_line(line)
-               data.append(parsed_data)
+               entry_time, color = line.strip().split()
+               entry_time = int(entry_time)
+               if entry_time > MINIMUM_TIMESTAMP:
+                   data.append((entry_time, color))
             last_read_position = logfile.tell()
         data = send_data(data)
         time.sleep(1)
 
 def parse_line(line):
-    entry_time, color = line.strip().split()
     return int(entry_time), color
 
 def send_data(data):
