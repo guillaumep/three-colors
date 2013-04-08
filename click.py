@@ -5,6 +5,7 @@
 
 import os
 import time
+import fcntl
 import socket
 import urlparse
 
@@ -19,11 +20,11 @@ print
 query = urlparse.parse_qs(os.environ['QUERY_STRING'])
 color = query['color'][0]
 
-sock = socket.socket()
-sock.connect(("127.0.0.1", 12003))
+# Write the color to the log
+log = open("click.log", "a")
+fcntl.lockf(log, fcntl.LOCK_EX)
+log.write("%d %s\n" % (int(time.time()), color))
+log.close()
 
-now = int(time.time())
-sock.sendall("threecolors.%s 1 %d\n" % (color, now))
-sock.close()
 
 print "%s it is!" % color

@@ -11,7 +11,9 @@
 function reload_images() {
   d = new Date();
   $("img").each(function() {
-    $(this).attr("src", $(this).attr("src") + "&" + d.getTime());
+    // add a timestamp to avoid browser cache
+    orig_url = $(this).attr("src").split("&_timestamp")[0]
+    $(this).attr("src", orig_url + "&_timestamp=" + d.getTime());
   })
 }
 
@@ -29,10 +31,20 @@ body {
 <body>
 <!-- Display a pie chart using the sum of all data accumulated for each colors, i.e. the maximum of the integral of the series -->
 <center>
-<img src="http://graphdemo.net/render/?width=500&height=500&target=alias(integral(threecolors.blue),'bleu')&target=alias(integral(threecolors.green),'vert')&target=alias(integral(threecolors.red),'rouge')&colors=blue,green,red&graphType=pie&pieMode=maximum"/>
+<table>
+<tr>
+<td>
+<img src="http://graphdemo.net/render/?width=500&height=500&target=alias(integral(threecolors.blue),'bleu')&target=alias(integral(threecolors.green),'vert')&target=alias(integral(threecolors.red),'rouge')&colorList=blue,green,red&graphType=pie&pieMode=maximum&hideLegend=true&from=-15min"/>
+</td>
+<td>
+<img src="http://graphdemo.net/render/?width=200&height=200&target=threecolors.blue&colorList=blue&yMin=0&lineMode=staircase&areaMode=all&from=-15min"">
 <br/>
+<img src="http://graphdemo.net/render/?width=200&height=200&target=threecolors.green&colorList=green&yMin=0&lineMode=staircase&areaMode=all&from=-15min"">
 <br/>
-<!-- img src="http://graphdemo.net/render/?width=500&height=200&target=threecolors.blue&target=threecolors.green&target=threecolors.red&yMin=0"/-->
+<img src="http://graphdemo.net/render/?width=200&height=200&target=threecolors.red&colorList=red&yMin=0&lineMode=staircase&areaMode=all&from=-15min">
+</td>
+</tr>
+</table>
 </center>
 </body>
 
