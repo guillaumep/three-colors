@@ -28,7 +28,12 @@ body {
 
 <body>
 <!-- Display a pie chart using the sum of all data accumulated for each colors, i.e. the maximum of the integral of the series -->
-<center><img src="http://graphdemo.net/render/?width=500&height=500&target=integral(threecolors.blue)&target=integral(threecolors.green)&target=integral(threecolors.red)&graphType=pie&pieMode=maximum"/></center>
+<center>
+<img src="http://graphdemo.net/render/?width=500&height=500&target=alias(integral(threecolors.blue),'bleu')&target=alias(integral(threecolors.green),'vert')&target=alias(integral(threecolors.red),'rouge')&colors=blue,green,red&graphType=pie&pieMode=maximum"/>
+<br/>
+<br/>
+<!-- img src="http://graphdemo.net/render/?width=500&height=200&target=threecolors.blue&target=threecolors.green&target=threecolors.red&yMin=0"/-->
+</center>
 </body>
 
 </html>
