@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<!-- This code is in the public domain. -->
+
+<head>
+<script src="jquery-1.9.1.min.js"></script>
+
+<script>
+<!-- reload the pie chart every 5 seconds -->
+function reload_images() {
+  d = new Date();
+  $("img").each(function() {
+    $(this).attr("src", $(this).attr("src") + "&" + d.getTime());
+  })
+}
+
+setInterval("reload_images()", 5000);
+</script>
+
+<style type="text/css">
+body {
+  background-color: black;
+} 
+</style>
+
+</head>
+
+<body>
+<!-- Display a pie chart using the sum of all data accumulated for each colors, i.e. the maximum of the integral of the series -->
+<center><img src="http://graphdemo.net/render/?width=500&height=500&target=integral(threecolors.blue)&target=integral(threecolors.green)&target=integral(threecolors.red)&graphType=pie&pieMode=maximum"/></center>
+</body>
+
+</html>
