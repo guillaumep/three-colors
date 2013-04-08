@@ -64,6 +64,10 @@ def send_data(data):
     return filter(lambda (timestamp, color): timestamp >= current_mod_timestamp, data)
 
 def send_message(colordata, timestamp):
+    # Message format example:
+    #  threecolors.red 3 1365435860
+    #  threecolors.green 4 1365435860
+    #  threecolors.blue 2 1365435860
     graphitelines = ["threecolors.%s %d %d" % (color, count, timestamp) for color, count in colordata.iteritems()]
     data = '\n'.join(graphitelines) + '\n'
     sock = socket.socket()
