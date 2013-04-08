@@ -33,9 +33,6 @@ def main():
         data = send_data(data)
         time.sleep(1)
 
-def parse_line(line):
-    return int(entry_time), color
-
 def send_data(data):
     if not data:
         return data
